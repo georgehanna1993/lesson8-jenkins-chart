@@ -1,0 +1,95 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: one
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: one
+          image: alpine
+          command: ["sh", "-c", "echo one; sleep 5"]
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: two
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: two
+          image: alpine
+          command: ["sh", "-c", "echo two; sleep 5"]
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: three
+  annotations:
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: three
+          image: alpine
+          command: ["sh", "-c", "echo three; sleep 5"]
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: four
+  annotations:
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: four
+          image: alpine
+          command: ["sh", "-c", "echo four; sleep 5"]
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: five
+  annotations:
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: five
+          image: alpine
+          command: ["sh", "-c", "echo five; sleep 5"]
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: six
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: six
+          image: alpine
+          command: ["sh", "-c", "echo six; sleep 5"]
