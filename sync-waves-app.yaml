@@ -7,7 +7,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/gh93/lesson8-jenkins-chart.git
+    repoURL: https://github.com/georgehanna1993/lesson8-jenkins-chart.git
     targetRevision: main
     path: sync-waves
 
